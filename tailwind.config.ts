@@ -9,12 +9,7 @@ export default {
       fontFamily: {
         // from next/font variables set in layout.tsx
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        mono: [
-          "var(--font-fira)",
-          "ui-monospace",
-          "SFMono-Regular",
-          "monospace",
-        ],
+        heading: ["var(--font-poppins)", "Poppins", "system-ui", "sans-serif"],
       },
       colors: {
         brand: {

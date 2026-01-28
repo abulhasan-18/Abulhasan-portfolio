@@ -114,7 +114,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-14 md:py-20">
-      <h2 className="text-center text-2xl md:text-3xl font-bold">
+      <h2 className="font-heading text-center text-2xl md:text-3xl font-bold">
         Projects & Experience
       </h2>
 
@@ -144,7 +144,7 @@ export default function Projects() {
                   </span>
                 </div>
 
-                <ul className="mt-2 list-disc pl-5 text-sm text-gray-700 dark:text-gray-300 space-y-1">
+                <ul className="mt-2 list-disc pl-5 text-sm text-[rgb(var(--text-secondary))] space-y-1">
                   {p.points.map((pt) => (
                     <li key={pt}>{pt}</li>
                   ))}

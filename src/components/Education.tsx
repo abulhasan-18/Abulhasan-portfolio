@@ -27,7 +27,7 @@ const education: Edu[] = [
 export default function Education() {
   return (
     <section id="education" className="py-14 md:py-20">
-      <h2 className="text-center text-2xl md:text-3xl font-bold">Education</h2>
+      <h2 className="font-heading text-center text-2xl md:text-3xl font-bold">Education</h2>
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {education.map((e, i) => (

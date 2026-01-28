@@ -1,10 +1,20 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Fira_Code } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { Providers } from "./Providers";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const fira = Fira_Code({ subsets: ["latin"], variable: "--font-fira" });
+const inter = Inter({ 
+  subsets: ["latin"], 
+  variable: "--font-inter",
+  display: "swap"
+});
+
+const poppins = Poppins({ 
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"], 
+  variable: "--font-poppins",
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   title: "Mohammed Abulhasan M — Portfolio",
@@ -20,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${fira.variable} font-sans antialiased`}
+        className={`${inter.variable} ${poppins.variable} font-sans antialiased`}
       >
         <Providers>{children}</Providers>
       </body>

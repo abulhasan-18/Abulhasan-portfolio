@@ -41,7 +41,7 @@ export default function Header() {
         >
           <Link
             href="/"
-            className="font-bold text-lg tracking-tight leading-none pl-2 
+            className="font-heading font-bold text-lg tracking-tight leading-none pl-2 
                      bg-gradient-to-r from-[rgb(var(--accent-primary))] to-[rgb(var(--accent-secondary))] 
                      bg-clip-text text-transparent
                      hover:opacity-80 transition-opacity"

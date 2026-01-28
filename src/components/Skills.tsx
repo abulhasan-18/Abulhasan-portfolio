@@ -45,7 +45,7 @@ const items = [
 export default function Skills() {
   return (
     <section id="skills" className="py-14 md:py-20">
-      <h2 className="text-center text-2xl md:text-3xl font-bold">
+      <h2 className="font-heading text-center text-2xl md:text-3xl font-bold">
         Technical Skills
       </h2>
 

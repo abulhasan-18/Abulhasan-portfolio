@@ -20,7 +20,7 @@ export default function Hero() {
         transition={{ duration: 0.6 }}
         className="card mx-auto max-w-4xl p-8 md:p-12 text-center relative overflow-hidden"
       >
-        <h1 className="text-3xl md:text-5xl font-bold leading-tight text-[rgb(var(--text-primary))]">
+        <h1 className="font-heading text-3xl md:text-5xl font-bold leading-tight text-[rgb(var(--text-primary))]">
           <Balancer>MOHAMMED ABULHASAN M</Balancer>
         </h1>
 
