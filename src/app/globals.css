@@ -1,55 +1,342 @@
 /* Tailwind v4: import once */
 @import "tailwindcss";
 
-/* smooth scrolling + selection */
+/* Theme CSS Variables - Soft & Comfortable Color Palettes */
+[data-theme="light"] {
+  --bg-primary: 250 251 252;
+  --bg-secondary: 255 255 255;
+  --text-primary: 51 65 85;
+  --text-secondary: 100 116 139;
+  --border-color: 226 232 240;
+  --accent-primary: 96 165 250;
+  --accent-secondary: 59 130 246;
+  --accent-light: 239 246 255;
+  --nav-bg: 255 255 255;
+  --nav-border: 241 245 249;
+}
+
+[data-theme="dark"] {
+  --bg-primary: 30 41 59;
+  --bg-secondary: 51 65 85;
+  --text-primary: 226 232 240;
+  --text-secondary: 148 163 184;
+  --border-color: 71 85 105;
+  --accent-primary: 125 211 252;
+  --accent-secondary: 56 189 248;
+  --accent-light: 7 89 133;
+  --nav-bg: 30 41 59;
+  --nav-border: 51 65 85;
+}
+
+[data-theme="purple"] {
+  --bg-primary: 250 245 255;
+  --bg-secondary: 255 255 255;
+  --text-primary: 88 28 135;
+  --text-secondary: 126 34 206;
+  --border-color: 233 213 255;
+  --accent-primary: 168 85 247;
+  --accent-secondary: 147 51 234;
+  --accent-light: 250 245 255;
+  --nav-bg: 255 255 255;
+  --nav-border: 243 232 255;
+}
+
+[data-theme="green"] {
+  --bg-primary: 240 253 244;
+  --bg-secondary: 255 255 255;
+  --text-primary: 22 101 52;
+  --text-secondary: 34 197 94;
+  --border-color: 209 250 229;
+  --accent-primary: 52 211 153;
+  --accent-secondary: 16 185 129;
+  --accent-light: 240 253 244;
+  --nav-bg: 255 255 255;
+  --nav-border: 220 252 231;
+}
+
+/* smooth scrolling */
 html,
 body {
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-::selection {
-  background-color: #7dd3fc;
-  color: #000;
-} /* sky-300-like */
 
-/* subtle grid background */
-body {
-  background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-  background-size: 16px 16px;
+/* Theme-specific selection colors - softer */
+[data-theme="light"] ::selection {
+  background-color: rgba(96, 165, 250, 0.3);
+  color: rgb(15, 23, 42);
 }
-html.dark body {
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.06) 1px,
-    transparent 1px
+
+[data-theme="dark"] ::selection {
+  background-color: rgba(125, 211, 252, 0.3);
+  color: rgb(15, 23, 42);
+}
+
+[data-theme="purple"] ::selection {
+  background-color: rgba(168, 85, 247, 0.25);
+  color: rgb(88, 28, 135);
+}
+
+[data-theme="green"] ::selection {
+  background-color: rgba(52, 211, 153, 0.3);
+  color: rgb(22, 101, 52);
+}
+
+/* Theme-specific backgrounds - very subtle */
+body {
+  background-color: rgb(var(--bg-primary));
+  color: rgb(var(--text-primary));
+  position: relative;
+}
+
+[data-theme="light"] body {
+  background: linear-gradient(180deg, 
+    rgb(250, 251, 252) 0%, 
+    rgb(248, 250, 252) 100%
   );
+  background-attachment: fixed;
+}
+
+[data-theme="light"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(96, 165, 250, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.02) 0%, transparent 50%),
+    radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+[data-theme="dark"] body {
+  background: linear-gradient(180deg, 
+    rgb(30, 41, 59) 0%, 
+    rgb(15, 23, 42) 100%
+  );
+  background-attachment: fixed;
+}
+
+[data-theme="dark"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(125, 211, 252, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+    radial-gradient(rgba(71, 85, 105, 0.3) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+[data-theme="purple"] body {
+  background: linear-gradient(180deg, 
+    rgb(250, 245, 255) 0%,
+    rgb(243, 232, 255) 100%
+  );
+  background-attachment: fixed;
+}
+
+[data-theme="purple"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 30% 20%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(217, 70, 239, 0.04) 0%, transparent 50%),
+    radial-gradient(rgba(192, 132, 252, 0.2) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+[data-theme="green"] body {
+  background: linear-gradient(180deg, 
+    rgb(240, 253, 244) 0%,
+    rgb(220, 252, 231) 100%
+  );
+  background-attachment: fixed;
+}
+
+[data-theme="green"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(52, 211, 153, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.04) 0%, transparent 50%),
+    radial-gradient(rgba(52, 211, 153, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* custom components */
 @layer components {
+  /* Universal card styling with theme awareness - softer */
   .card {
-    border-radius: 1rem; /* rounded-2xl */
-    border: 1px solid rgba(0, 0, 0, 0.05); /* border-black/5 */
-    background-color: rgba(255, 255, 255, 0.7); /* bg-white/70 */
-    backdrop-filter: blur(12px); /* backdrop-blur-md */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
-    transition: box-shadow 0.2s;
+    border-radius: 1rem;
+    border: 1px solid rgba(var(--border-color), 0.5);
+    background-color: rgba(var(--bg-secondary), 0.8);
+    backdrop-filter: blur(10px) saturate(150%);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.03),
+      0 8px 16px -4px rgba(var(--accent-primary), 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
   }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(var(--accent-primary), 0.2),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
   .card:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -4px rgba(0, 0, 0, 0.1); /* hover:shadow-lg */
+    border-color: rgba(var(--accent-primary), 0.3);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 12px 24px -6px rgba(var(--accent-primary), 0.08);
+    transform: translateY(-2px);
   }
-  html.dark .card {
-    border: 1px solid rgba(255, 255, 255, 0.1); /* dark:border-white/10 */
-    background-color: rgba(255, 255, 255, 0.05); /* dark:bg-white/5 */
+
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  /* Light theme specific */
+  [data-theme="light"] .card {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 8px 16px -4px rgba(96, 165, 250, 0.06);
+  }
+
+  [data-theme="light"] .card:hover {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.08),
+      0 12px 24px -6px rgba(96, 165, 250, 0.12);
+  }
+
+  /* Dark theme specific */
+  [data-theme="dark"] .card {
+    background: rgba(51, 65, 85, 0.6);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 8px 16px -4px rgba(125, 211, 252, 0.08);
+  }
+
+  [data-theme="dark"] .card:hover {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 12px 24px -6px rgba(125, 211, 252, 0.15);
+  }
+
+  /* Purple theme specific */
+  [data-theme="purple"] .card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(233, 213, 255, 0.8);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 8px 16px -4px rgba(168, 85, 247, 0.08);
+  }
+
+  [data-theme="purple"] .card:hover {
+    border-color: rgba(168, 85, 247, 0.3);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.08),
+      0 12px 24px -6px rgba(168, 85, 247, 0.15);
+  }
+
+  /* Green theme specific */
+  [data-theme="green"] .card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(209, 250, 229, 0.8);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 8px 16px -4px rgba(52, 211, 153, 0.08);
+  }
+
+  [data-theme="green"] .card:hover {
+    border-color: rgba(52, 211, 153, 0.4);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.08),
+      0 12px 24px -6px rgba(52, 211, 153, 0.15);
+  }
+
+  /* Themed text colors */
+  .text-primary {
+    color: rgb(var(--text-primary));
+  }
+  .text-secondary {
+    color: rgb(var(--text-secondary));
+  }
+  .text-accent {
+    color: rgb(var(--accent-primary));
+  }
+  .border-themed {
+    border-color: rgba(var(--border-color), 1);
+  }
+  .bg-themed {
+    background-color: rgba(var(--bg-primary), 0.7);
+  }
+
+  /* Accent button styling - softer */
+  .btn-accent {
+    background: linear-gradient(
+      135deg,
+      rgb(var(--accent-primary)),
+      rgb(var(--accent-secondary))
+    );
+    color: white;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(var(--accent-primary), 0.2);
+  }
+
+  .btn-accent:hover {
+    box-shadow: 0 4px 12px rgba(var(--accent-primary), 0.3);
+    transform: translateY(-1px);
   }
 
   /* fancy underline links */
   .link-underline {
-    background-image: linear-gradient(to right, #38bdf8, #38bdf8); /* sky-400 */
+    background-image: linear-gradient(
+      to right,
+      rgb(var(--accent-primary)),
+      rgb(var(--accent-primary))
+    );
     background-size: 0% 2px;
     background-position: 0 100%;
     background-repeat: no-repeat;
-    transition: background-size 200ms ease;
+    transition: background-size 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
+  
   a:hover .link-underline {
     background-size: 100% 2px;
   }

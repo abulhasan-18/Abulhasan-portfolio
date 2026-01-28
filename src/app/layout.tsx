@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { Inter, Fira_Code } from "next/font/google";
 import { Providers } from "./Providers";
 
-const inter = Inter({ subsets: ["latin"] });
-const fira = Fira_Code({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const fira = Fira_Code({ subsets: ["latin"], variable: "--font-fira" });
 
 export const metadata: Metadata = {
   title: "Mohammed Abulhasan M — Portfolio",
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} ${fira.className} bg-white dark:bg-black text-gray-900 dark:text-gray-100`}
+        className={`${inter.variable} ${fira.variable} font-sans antialiased`}
       >
         <Providers>{children}</Providers>
       </body>
