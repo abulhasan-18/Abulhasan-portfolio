@@ -45,7 +45,7 @@ const items = [
 export default function Skills() {
   return (
     <section id="skills" className="py-14 md:py-20">
-      <h2 className="font-heading text-center text-2xl md:text-3xl font-bold">
+      <h2 className="text-center text-2xl md:text-3xl font-bold">
         Technical Skills
       </h2>
 
@@ -61,9 +61,9 @@ export default function Skills() {
               transition={{ delay: i * 0.05, duration: 0.5 }}
               className="card p-6 hover:-translate-y-0.5 transition-transform"
             >
-              <Icon className="h-8 w-8 text-[rgb(43,121,255)]" />
-              <h3 className="mt-3 font-semibold">{s.title}</h3>
-              <ul className="mt-2 text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <Icon className="h-8 w-8 text-[rgb(var(--accent-primary))]" />
+              <h3 className="mt-3 font-semibold text-[rgb(var(--text-primary))]">{s.title}</h3>
+              <ul className="mt-2 text-sm text-[rgb(var(--text-secondary))] space-y-1">
                 {s.list.map((t) => (
                   <li key={t}>• {t}</li>
                 ))}

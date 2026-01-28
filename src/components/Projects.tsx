@@ -114,7 +114,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-14 md:py-20">
-      <h2 className="font-heading text-center text-2xl md:text-3xl font-bold">
+      <h2 className="text-center text-2xl md:text-3xl font-bold">
         Projects & Experience
       </h2>
 
@@ -129,17 +129,17 @@ export default function Projects() {
             className="card p-6"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-xl bg-[rgba(43,121,255,0.09)] p-3">
-                <p.Icon className="h-5 w-5 text-[rgb(43,121,255)]" />
+              <div className="rounded-xl bg-[rgba(var(--accent-primary),0.09)] p-3">
+                <p.Icon className="h-5 w-5 text-[rgb(var(--accent-primary))]" />
               </div>
 
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-semibold">{p.title}</h3>
-                  <span className="text-xs rounded-full bg-black/5 dark:bg-white/10 px-2 py-0.5">
+                  <h3 className="font-semibold text-[rgb(var(--text-primary))]">{p.title}</h3>
+                  <span className="text-xs rounded-full bg-[rgba(var(--accent-primary),0.08)] px-2 py-0.5 text-[rgb(var(--text-secondary))]">
                     {p.org}
                   </span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-[rgb(var(--text-secondary))] opacity-70">
                     {formatPeriod(p)}
                   </span>
                 </div>

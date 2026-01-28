@@ -5,11 +5,16 @@ export default {
   content: ["./src/app/**/*.{ts,tsx}", "./src/components/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      container: { center: true, padding: "1rem" },
+      container: { 
+        center: true, 
+        padding: {
+          DEFAULT: "1rem",
+          sm: "1.5rem",
+          lg: "2rem",
+        },
+      },
       fontFamily: {
-        // from next/font variables set in layout.tsx
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        heading: ["var(--font-poppins)", "Poppins", "system-ui", "sans-serif"],
+        sans: ["var(--font-ibm-plex-sans)", "IBM Plex Sans", "system-ui", "sans-serif"],
       },
       colors: {
         brand: {

@@ -13,7 +13,7 @@ const activities = [
 export default function Activities() {
   return (
     <section id="activities" className="py-14 md:py-20">
-      <h2 className="font-heading text-center text-2xl md:text-3xl font-bold">
+      <h2 className="text-center text-2xl md:text-3xl font-bold">
         Other Activities
       </h2>
 

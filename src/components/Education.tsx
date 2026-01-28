@@ -27,7 +27,7 @@ const education: Edu[] = [
 export default function Education() {
   return (
     <section id="education" className="py-14 md:py-20">
-      <h2 className="font-heading text-center text-2xl md:text-3xl font-bold">Education</h2>
+      <h2 className="text-center text-2xl md:text-3xl font-bold">Education</h2>
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {education.map((e, i) => (
@@ -40,16 +40,16 @@ export default function Education() {
             className="card p-6 hover:-translate-y-0.5 transition-transform"
           >
             <div className="flex items-start gap-3">
-              <div className="rounded-xl bg-[rgba(43,121,255,0.09)] p-2">
-                <GraduationCap className="h-5 w-5 text-[rgb(43,121,255)]" />
+              <div className="rounded-xl bg-[rgba(var(--accent-primary),0.09)] p-2">
+                <GraduationCap className="h-5 w-5 text-[rgb(var(--accent-primary))]" />
               </div>
               <div>
-                <h3 className="font-semibold">{e.degree}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <h3 className="font-semibold text-[rgb(var(--text-primary))]">{e.degree}</h3>
+                <p className="text-sm text-[rgb(var(--text-secondary))]">
                   {e.org}
                 </p>
                 {e.detail ? (
-                  <p className="mt-1 text-sm text-gray-500">{e.detail}</p>
+                  <p className="mt-1 text-sm text-[rgb(var(--text-secondary))] opacity-80">{e.detail}</p>
                 ) : null}
               </div>
             </div>
