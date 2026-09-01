@@ -1,32 +1,16 @@
 "use client";
 
 import { ThemeProvider } from "next-themes";
-import { ReactNode, useEffect } from "react";
-import { useTheme } from "next-themes";
-
-function ThemeHandler() {
-  const { theme } = useTheme();
-  
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-  
-  return null;
-}
+import { ReactNode } from "react";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider
-      attribute="data-theme"
+      attribute="class"
       defaultTheme="light"
-      themes={["light", "dark"]}
       enableSystem={false}
+      disableTransitionOnChange={false}
     >
-      <ThemeHandler />
       {children}
     </ThemeProvider>
   );

@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning data-theme="light" className="light">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${ibmPlexSans.variable} font-sans antialiased`}
       >

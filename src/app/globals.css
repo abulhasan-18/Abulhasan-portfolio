@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode in Tailwind v4 */
+@variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -7,7 +10,7 @@
 
   body {
     min-height: 100vh;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
     @apply bg-slate-50 text-slate-900 antialiased dark:bg-[#0a0c10] dark:text-slate-100;
   }
 
@@ -33,7 +36,8 @@ body::before {
   z-index: -1;
 }
 
-.dark body::before {
+.dark body::before,
+[data-theme="dark"] body::before {
   background-image: 
     radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
@@ -46,9 +50,9 @@ body::before {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  @apply bg-white/95 text-slate-900 border border-slate-200/90 shadow-sm backdrop-blur-md
+  @apply bg-white text-slate-900 border border-slate-200 shadow-sm backdrop-blur-md
          hover:border-blue-400/60 hover:shadow-md hover:-translate-y-0.5
-         dark:bg-[#12161e]/90 dark:text-slate-100 dark:border-slate-800/90
+         dark:bg-[#12161e] dark:text-slate-100 dark:border-slate-800
          dark:hover:border-sky-500/50 dark:hover:shadow-lg dark:hover:shadow-sky-500/5;
 }
 
@@ -68,7 +72,8 @@ body::before {
   opacity: 1;
 }
 
-.dark .card::before {
+.dark .card::before,
+[data-theme="dark"] .card::before {
   background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.45), transparent);
 }
 
@@ -85,11 +90,13 @@ body::before {
   transform: translateY(-1px);
 }
 
-.dark .btn-accent {
+.dark .btn-accent,
+[data-theme="dark"] .btn-accent {
   background: linear-gradient(135deg, #0284c7, #4f46e5);
   box-shadow: 0 2px 10px rgba(2, 132, 199, 0.3);
 }
 
-.dark .btn-accent:hover {
+.dark .btn-accent:hover,
+[data-theme="dark"] .btn-accent:hover {
   box-shadow: 0 4px 18px rgba(56, 189, 248, 0.35);
 }
