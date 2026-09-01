@@ -9,16 +9,14 @@ export default function Education() {
     <section id="education" className="py-10 sm:py-16 md:py-20">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 px-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold 
-                      bg-[rgba(var(--accent-primary),0.1)] text-[rgb(var(--accent-primary))] 
-                      border border-[rgba(var(--accent-primary),0.2)] mb-3">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-sky-950/60 dark:text-sky-300 border border-blue-200 dark:border-sky-800/60 mb-3 shadow-xs">
           <GraduationCap className="h-3.5 w-3.5" />
-          <span>Qualifications & Credentials</span>
+          <span>Qualifications &amp; Credentials</span>
         </div>
-        <h2 className="text-xl sm:text-3xl font-bold text-[rgb(var(--text-primary))]">
-          Education & Certifications
+        <h2 className="text-xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100">
+          Education &amp; Certifications
         </h2>
-        <p className="mt-2 text-xs sm:text-sm text-[rgb(var(--text-secondary))]">
+        <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
           Formal academic foundation and specialized industry certifications in Software Engineering, Data, and Business Analysis
         </p>
       </div>
@@ -26,8 +24,8 @@ export default function Education() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
         {/* Academic Degrees */}
         <div className="space-y-4 sm:space-y-5">
-          <h3 className="text-base sm:text-lg font-bold text-[rgb(var(--text-primary))] flex items-center gap-2">
-            <GraduationCap className="h-4 w-4 sm:h-5 sm:w-5 text-[rgb(var(--accent-primary))]" />
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <GraduationCap className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-sky-400" />
             <span>Academic Background</span>
           </h3>
 
@@ -39,23 +37,23 @@ export default function Education() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.35 }}
-                className="card p-4 sm:p-5 hover:-translate-y-0.5 transition-transform"
+                className="card p-4 sm:p-5"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-2">
-                  <h4 className="font-bold text-sm sm:text-base text-[rgb(var(--text-primary))]">
+                  <h4 className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100">
                     {edu.degree}
                   </h4>
-                  <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-[rgba(var(--bg-primary),0.9)] text-[rgb(var(--text-secondary))] shrink-0 font-medium self-start">
+                  <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 shrink-0 font-medium self-start">
                     {edu.period}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm font-medium text-[rgb(var(--accent-primary))] mt-1">
+                <p className="text-xs sm:text-sm font-medium text-blue-600 dark:text-sky-400 mt-1">
                   {edu.institution}
                 </p>
-                <p className="text-[11px] sm:text-xs text-[rgb(var(--text-secondary))] font-medium mt-0.5">
+                <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">
                   {edu.status}
                 </p>
-                <p className="mt-2 text-xs text-[rgb(var(--text-secondary))] opacity-90 leading-relaxed">
+                <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 opacity-90 leading-relaxed">
                   {edu.details}
                 </p>
               </motion.article>
@@ -65,8 +63,8 @@ export default function Education() {
 
         {/* Professional Certifications */}
         <div className="space-y-4 sm:space-y-5">
-          <h3 className="text-base sm:text-lg font-bold text-[rgb(var(--text-primary))] flex items-center gap-2">
-            <Award className="h-4 w-4 sm:h-5 sm:w-5 text-[rgb(var(--accent-primary))]" />
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <Award className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-sky-400" />
             <span>Industry Certifications</span>
           </h3>
 
@@ -78,23 +76,23 @@ export default function Education() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, duration: 0.35 }}
-                className="card p-3.5 sm:p-4 hover:-translate-y-0.5 transition-transform"
+                className="card p-3.5 sm:p-4"
               >
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                    <div className="rounded-lg bg-[rgba(var(--accent-primary),0.1)] p-1.5 sm:p-2 shrink-0">
-                      <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[rgb(var(--accent-primary))]" />
+                    <div className="rounded-lg bg-blue-50 dark:bg-sky-950/80 p-1.5 sm:p-2 shrink-0">
+                      <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-blue-600 dark:text-sky-400" />
                     </div>
                     <div className="min-w-0">
-                      <h4 className="font-semibold text-xs sm:text-sm text-[rgb(var(--text-primary))] truncate">
+                      <h4 className="font-semibold text-xs sm:text-sm text-slate-900 dark:text-slate-100 truncate">
                         {cert.title}
                       </h4>
-                      <p className="text-[11px] sm:text-xs text-[rgb(var(--accent-primary))] font-medium">
+                      <p className="text-[11px] sm:text-xs text-blue-600 dark:text-sky-400 font-medium">
                         {cert.issuer}
                       </p>
                     </div>
                   </div>
-                  <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-md bg-[rgba(var(--bg-primary),0.8)] border border-[rgba(var(--border-color),0.5)] text-[rgb(var(--text-secondary))] shrink-0 font-medium">
+                  <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 shrink-0 font-medium">
                     {cert.year}
                   </span>
                 </div>

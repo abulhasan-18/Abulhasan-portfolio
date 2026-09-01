@@ -1,66 +1,22 @@
-/* Tailwind v4: import once */
 @import "tailwindcss";
 
-/* Theme CSS Variables - Direct Fallbacks on :root */
-:root,
-[data-theme="light"],
-.light {
-  --bg-primary: 248 250 252;
-  --bg-secondary: 255 255 255;
-  --text-primary: 15 23 42;
-  --text-secondary: 71 85 105;
-  --border-color: 226 232 240;
-  --accent-primary: 37 99 235;
-  --accent-secondary: 79 70 229;
-  --accent-light: 238 242 255;
-  --nav-bg: 255 255 255;
-  --nav-border: 226 232 240;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply bg-slate-50 text-slate-900 antialiased dark:bg-[#0a0c10] dark:text-slate-100;
+  }
+
+  ::selection {
+    @apply bg-blue-500/20 text-blue-900 dark:bg-sky-400/30 dark:text-sky-100;
+  }
 }
 
-[data-theme="dark"],
-.dark {
-  --bg-primary: 10 12 16;
-  --bg-secondary: 18 22 30;
-  --text-primary: 248 250 252;
-  --text-secondary: 156 163 175;
-  --border-color: 38 46 60;
-  --accent-primary: 56 189 248;
-  --accent-secondary: 99 102 241;
-  --accent-light: 15 23 42;
-  --nav-bg: 10 12 16;
-  --nav-border: 38 46 60;
-}
-
-/* smooth scrolling */
-html,
-body {
-  scroll-behavior: smooth;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Base body styles */
-body {
-  background-color: rgb(var(--bg-primary, 248 250 252));
-  color: rgb(var(--text-primary, 15 23 42));
-  min-height: 100vh;
-  position: relative;
-}
-
-/* Background gradients for light and dark */
-:root body,
-[data-theme="light"] body,
-.light body {
-  background: linear-gradient(180deg, rgb(248, 250, 252) 0%, rgb(241, 245, 249) 100%);
-  background-attachment: fixed;
-}
-
-[data-theme="dark"] body,
-.dark body {
-  background: linear-gradient(180deg, rgb(10, 12, 16) 0%, rgb(7, 9, 13) 100%);
-  background-attachment: fixed;
-}
-
-/* Ambient mesh background layer */
+/* Background ambient glow effect */
 body::before {
   content: '';
   position: fixed;
@@ -69,26 +25,31 @@ body::before {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(var(--accent-primary, 37 99 235), 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 85% 65%, rgba(var(--accent-secondary, 79 70 229), 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 65%, rgba(99, 102, 241, 0.03) 0%, transparent 45%),
     radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 28px 28px;
   pointer-events: none;
   z-index: -1;
 }
 
-/* Card styling */
+.dark body::before {
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
+    radial-gradient(rgba(71, 85, 105, 0.25) 1px, transparent 1px);
+}
+
+/* Reusable custom card styles */
 .card {
   border-radius: 1rem;
-  border: 1px solid rgba(var(--border-color, 226 232 240), 0.8);
-  background-color: rgba(var(--bg-secondary, 255 255 255), 0.92);
-  backdrop-filter: blur(12px) saturate(160%);
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.04),
-    0 6px 16px -4px rgba(var(--accent-primary, 37 99 235), 0.04);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  @apply bg-white/95 text-slate-900 border border-slate-200/90 shadow-sm backdrop-blur-md
+         hover:border-blue-400/60 hover:shadow-md hover:-translate-y-0.5
+         dark:bg-[#12161e]/90 dark:text-slate-100 dark:border-slate-800/90
+         dark:hover:border-sky-500/50 dark:hover:shadow-lg dark:hover:shadow-sky-500/5;
 }
 
 .card::before {
@@ -98,76 +59,37 @@ body::before {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(var(--accent-primary, 37 99 235), 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
   opacity: 0;
   transition: opacity 0.25s ease;
-}
-
-.card:hover {
-  border-color: rgba(var(--accent-primary, 37 99 235), 0.45);
-  box-shadow: 
-    0 8px 24px -4px rgba(0, 0, 0, 0.08),
-    0 0 15px -3px rgba(var(--accent-primary, 37 99 235), 0.12);
-  transform: translateY(-2px);
 }
 
 .card:hover::before {
   opacity: 1;
 }
 
-/* Dark mode card adjustments */
-[data-theme="dark"] .card,
-.dark .card {
-  background-color: rgba(18, 22, 30, 0.88);
-  border-color: rgba(38, 46, 60, 0.85);
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.4),
-    0 8px 20px -4px rgba(0, 0, 0, 0.3);
+.dark .card::before {
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.45), transparent);
 }
 
-[data-theme="dark"] .card:hover,
-.dark .card:hover {
-  border-color: rgba(56, 189, 248, 0.45);
-  box-shadow: 
-    0 12px 30px -4px rgba(0, 0, 0, 0.6),
-    0 0 20px -2px rgba(56, 189, 248, 0.2);
-}
-
-/* Accent button styling */
+/* Primary accent button */
 .btn-accent {
-  background: linear-gradient(
-    135deg,
-    rgb(var(--accent-primary, 37 99 235)),
-    rgb(var(--accent-secondary, 79 70 229))
-  );
-  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 10px rgba(var(--accent-primary, 37 99 235), 0.28);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.25);
 }
 
 .btn-accent:hover {
-  box-shadow: 0 4px 18px rgba(var(--accent-primary, 37 99 235), 0.42);
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4);
   transform: translateY(-1px);
 }
 
-/* Link underline effect */
-.link-underline {
-  background-image: linear-gradient(
-    to right,
-    rgb(var(--accent-primary, 37 99 235)),
-    rgb(var(--accent-secondary, 79 70 229))
-  );
-  background-size: 0% 2px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  transition: background-size 250ms cubic-bezier(0.4, 0, 0.2, 1);
+.dark .btn-accent {
+  background: linear-gradient(135deg, #0284c7, #4f46e5);
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.3);
 }
 
-a:hover .link-underline {
-  background-size: 100% 2px;
+.dark .btn-accent:hover {
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.35);
 }

@@ -18,7 +18,6 @@ const nav = [
 export default function Header() {
   const [open, setOpen] = useState(false);
 
-  // Close mobile menu on Escape key
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
@@ -26,15 +25,9 @@ export default function Header() {
   }, []);
 
   return (
-    <nav
-      className="sticky top-0 z-50 border-b backdrop-blur-xl
-                border-[rgba(var(--border-color),0.6)]
-                bg-[rgba(var(--nav-bg),0.88)]
-                shadow-sm
-                transition-all duration-300"
-    >
+    <nav className="sticky top-0 z-50 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/85 dark:bg-[#0a0c10]/85 backdrop-blur-xl shadow-xs transition-all duration-300">
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-        {/* Brand Name */}
+        {/* Brand */}
         <motion.div
           initial={{ y: -6, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -42,10 +35,7 @@ export default function Header() {
         >
           <Link
             href="/"
-            className="font-bold text-sm sm:text-base md:text-lg tracking-tight leading-none truncate
-                     bg-gradient-to-r from-[rgb(var(--accent-primary))] to-[rgb(var(--accent-secondary))] 
-                     bg-clip-text text-transparent
-                     hover:opacity-85 transition-opacity"
+            className="font-bold text-sm sm:text-base md:text-lg tracking-tight leading-none truncate bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-sky-400 dark:to-indigo-400 bg-clip-text text-transparent hover:opacity-85 transition-opacity"
             onClick={() => setOpen(false)}
           >
             Mohammed Abulhasan M
@@ -58,19 +48,10 @@ export default function Header() {
             <Link
               key={n.label}
               href={n.href}
-              className="text-xs sm:text-sm font-medium text-[rgb(var(--text-secondary))] 
-                       hover:text-[rgb(var(--accent-primary))] 
-                       transition-all duration-200
-                       relative group py-1"
+              className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 transition-colors relative group py-1"
             >
-              <span className="relative">
-                {n.label}
-                <span
-                  className="absolute left-0 -bottom-1 h-0.5 w-0 
-                               bg-gradient-to-r from-[rgb(var(--accent-primary))] to-[rgb(var(--accent-secondary))]
-                               group-hover:w-full transition-all duration-300 rounded-full"
-                />
-              </span>
+              <span>{n.label}</span>
+              <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-sky-400 dark:to-indigo-400 group-hover:w-full transition-all duration-300 rounded-full" />
             </Link>
           ))}
           <ThemeToggle />
@@ -85,19 +66,14 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg 
-                     border border-[rgba(var(--border-color),0.7)]
-                     bg-[rgba(var(--bg-secondary),0.8)]
-                     hover:bg-[rgba(var(--accent-primary),0.1)]
-                     hover:border-[rgba(var(--accent-primary),0.4)]
-                     transition-all duration-200"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors"
           >
-            {open ? <X className="h-5 w-5 text-[rgb(var(--text-primary))]" /> : <Menu className="h-5 w-5 text-[rgb(var(--text-primary))]" />}
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Responsive Mobile Dropdown */}
+      {/* Mobile Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -106,9 +82,8 @@ export default function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.22 }}
-            className="md:hidden border-t border-[rgba(var(--border-color),0.6)] 
-                     bg-[rgba(var(--nav-bg),0.98)] backdrop-blur-2xl shadow-xl overflow-hidden"
+            transition={{ duration: 0.2 }}
+            className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-[#0a0c10]/95 backdrop-blur-2xl shadow-xl overflow-hidden"
           >
             <ul className="px-4 py-3 space-y-1">
               {nav.map((n) => (
@@ -116,12 +91,7 @@ export default function Header() {
                   <Link
                     href={n.href}
                     onClick={() => setOpen(false)}
-                    className="block px-3.5 py-2.5 rounded-lg text-sm font-medium
-                             text-[rgb(var(--text-secondary))]
-                             hover:text-[rgb(var(--accent-primary))]
-                             hover:bg-[rgba(var(--accent-primary),0.08)]
-                             active:bg-[rgba(var(--accent-primary),0.12)]
-                             transition-all duration-150"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-sky-400 hover:bg-blue-50 dark:hover:bg-slate-800/60 transition-colors"
                   >
                     {n.label}
                   </Link>
