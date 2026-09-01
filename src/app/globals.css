@@ -11,15 +11,20 @@
   body {
     min-height: 100vh;
     transition: background-color 0.25s ease, color 0.25s ease;
-    @apply bg-slate-50 text-slate-900 antialiased dark:bg-[#0a0c10] dark:text-slate-100;
   }
 
   ::selection {
-    @apply bg-blue-500/20 text-blue-900 dark:bg-sky-400/30 dark:text-sky-100;
+    @apply bg-blue-500/20 text-blue-900;
   }
 }
 
-/* Background ambient glow effect */
+.dark ::selection,
+[data-theme="dark"] ::selection {
+  background-color: rgba(56, 189, 248, 0.3) !important;
+  color: #f8fafc !important;
+}
+
+/* Ambient glow effect */
 body::before {
   content: '';
   position: fixed;
@@ -39,21 +44,41 @@ body::before {
 .dark body::before,
 [data-theme="dark"] body::before {
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
     radial-gradient(rgba(71, 85, 105, 0.25) 1px, transparent 1px);
 }
 
-/* Reusable custom card styles */
+/* Universal card styles with dark and light variants */
 .card {
   border-radius: 1rem;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  @apply bg-white text-slate-900 border border-slate-200 shadow-sm backdrop-blur-md
-         hover:border-blue-400/60 hover:shadow-md hover:-translate-y-0.5
-         dark:bg-[#12161e] dark:text-slate-100 dark:border-slate-800
-         dark:hover:border-sky-500/50 dark:hover:shadow-lg dark:hover:shadow-sky-500/5;
+  background-color: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.dark .card,
+[data-theme="dark"] .card {
+  background-color: #12161e;
+  color: #f8fafc;
+  border-color: #262e3c;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.dark .card:hover,
+[data-theme="dark"] .card:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(56, 189, 248, 0.12);
 }
 
 .card::before {
@@ -74,7 +99,7 @@ body::before {
 
 .dark .card::before,
 [data-theme="dark"] .card::before {
-  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.45), transparent);
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
 }
 
 /* Primary accent button */
