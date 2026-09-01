@@ -6,7 +6,6 @@ import {
   Database,
   BarChart3,
   Lightbulb,
-  ArrowRight,
   CheckCircle2,
   GitMerge,
 } from "lucide-react";
@@ -25,7 +24,7 @@ export default function LifecycleWorkflow() {
           <span>The End-to-End Synergy</span>
         </div>
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-[rgb(var(--text-primary))] tracking-tight">
-          How I Connect App Development, Data Modeling & Business Growth
+          How I Connect App Development, Data Modeling &amp; Business Growth
         </h2>
         <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-[rgb(var(--text-secondary))] leading-relaxed px-1">
           I don’t just write code or build isolated dashboards. I engineer production applications, design the SQL star schemas to capture telemetry, perform deep data analysis on real user behavior, and translate insights into high-ROI business improvements.
@@ -37,28 +36,24 @@ export default function LifecycleWorkflow() {
           const Icon = stepIcons[idx];
           return (
             <motion.div
-              key={item.step}
+              key={item.title}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.4 }}
-              className="card p-4 sm:p-5 md:p-6 flex flex-col justify-between hover:-translate-y-1 transition-all relative overflow-hidden group"
+              className="card p-4 sm:p-5 md:p-6 flex flex-col justify-between hover:-translate-y-1 transition-all"
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-3 sm:mb-4">
-                  <div className="inline-flex rounded-xl bg-[rgba(var(--accent-primary),0.1)] p-2 sm:p-2.5">
-                    <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-[rgb(var(--accent-primary))]" />
+                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                  <div className="inline-flex rounded-xl bg-[rgba(var(--accent-primary),0.1)] p-2 sm:p-2.5 shrink-0">
+                    <Icon className="h-5 w-5 text-[rgb(var(--accent-primary))]" />
                   </div>
-                  <span className="text-xl sm:text-2xl font-black text-[rgb(var(--accent-primary))] opacity-25 font-mono">
-                    {item.step}
+                  <span className="text-[11px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[rgba(var(--accent-primary),0.08)] text-[rgb(var(--accent-primary))] border border-[rgba(var(--accent-primary),0.2)]">
+                    {item.badge}
                   </span>
                 </div>
 
-                <span className="text-[11px] sm:text-xs font-semibold px-2 sm:px-2.5 py-0.5 rounded-full bg-[rgba(var(--accent-primary),0.08)] text-[rgb(var(--accent-primary))] border border-[rgba(var(--accent-primary),0.2)]">
-                  {item.badge}
-                </span>
-
-                <h3 className="font-bold text-sm sm:text-base md:text-lg text-[rgb(var(--text-primary))] mt-2.5 sm:mt-3 leading-snug">
+                <h3 className="font-bold text-sm sm:text-base md:text-lg text-[rgb(var(--text-primary))] leading-snug">
                   {item.title}
                 </h3>
 
@@ -72,21 +67,12 @@ export default function LifecycleWorkflow() {
                       key={dIdx}
                       className="flex items-start gap-2 text-[11px] sm:text-xs text-[rgb(var(--text-secondary))]"
                     >
-                      <CheckCircle2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-[rgb(var(--accent-primary))] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[rgb(var(--accent-primary))] shrink-0 mt-0.5" />
                       <span className="leading-snug">{detail}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-
-              {/* Step connector arrow on desktop */}
-              {idx < LIFECYCLE_STEPS.length - 1 && (
-                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-                  <div className="h-6 w-6 rounded-full bg-[rgba(var(--bg-secondary),0.95)] border border-[rgba(var(--border-color),0.8)] shadow-sm flex items-center justify-center">
-                    <ArrowRight className="h-3 w-3 text-[rgb(var(--accent-primary))]" />
-                  </div>
-                </div>
-              )}
             </motion.div>
           );
         })}
