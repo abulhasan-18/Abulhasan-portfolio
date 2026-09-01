@@ -5,9 +5,9 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import { useRole } from "@/context/RoleContext";
 
 const nav = [
+  { label: "Overview", href: "#workflow" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
@@ -17,7 +17,6 @@ const nav = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const { roleConfig } = useRole();
 
   // Close mobile menu on Escape key
   useEffect(() => {
@@ -29,7 +28,7 @@ export default function Header() {
   return (
     <nav
       className="sticky top-0 z-50 border-b backdrop-blur-xl
-                border-[rgba(var(--border-color),0.4)]
+                border-[rgba(var(--border-color),0.5)]
                 bg-[rgba(var(--nav-bg),0.85)]
                 shadow-sm
                 transition-all duration-300"
@@ -39,7 +38,7 @@ export default function Header() {
         <motion.div
           initial={{ y: -6, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="flex items-center gap-3"
+          className="flex items-center gap-2 sm:gap-3"
         >
           <Link
             href="/"
@@ -52,9 +51,9 @@ export default function Header() {
             Mohammed Abulhasan M
           </Link>
 
-          <span className="hidden lg:inline-flex items-center gap-1 text-xs px-2.5 py-0.5 rounded-full bg-[rgba(var(--accent-primary),0.08)] border border-[rgba(var(--accent-primary),0.2)] text-[rgb(var(--text-secondary))] font-medium">
+          <span className="hidden sm:inline-flex items-center gap-1 text-xs px-2.5 py-0.5 rounded-full bg-[rgba(var(--accent-primary),0.08)] border border-[rgba(var(--accent-primary),0.2)] text-[rgb(var(--text-secondary))] font-medium">
             <Sparkles className="h-3 w-3 text-[rgb(var(--accent-primary))]" />
-            {roleConfig.shortLabel}
+            Software Engineer &amp; Analyst
           </span>
         </motion.div>
 
@@ -92,7 +91,7 @@ export default function Header() {
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
             className="inline-flex h-10 w-10 items-center justify-center rounded-xl 
-                     border border-[rgba(var(--border-color),0.4)]
+                     border border-[rgba(var(--border-color),0.5)]
                      bg-[rgba(var(--bg-secondary),0.6)]
                      hover:bg-[rgba(var(--accent-primary),0.1)]
                      hover:border-[rgba(var(--accent-primary),0.4)]

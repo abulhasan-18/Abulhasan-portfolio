@@ -2,12 +2,9 @@
 
 import { motion } from "framer-motion";
 import { GraduationCap, Award, CheckCircle } from "lucide-react";
-import { useRole } from "@/context/RoleContext";
 import { EDUCATION, CERTIFICATIONS } from "@/data/portfolioData";
 
 export default function Education() {
-  const { activeRole } = useRole();
-
   return (
     <section id="education" className="py-14 md:py-20">
       {/* Section Header */}
@@ -22,7 +19,7 @@ export default function Education() {
           Education & Certifications
         </h2>
         <p className="mt-2 text-sm text-[rgb(var(--text-secondary))]">
-          Formal academic foundation and specialized industry certifications
+          Formal academic foundation and specialized industry certifications in Software Engineering, Data, and Business Analysis
         </p>
       </div>
 
@@ -74,44 +71,35 @@ export default function Education() {
           </h3>
 
           <div className="space-y-4">
-            {CERTIFICATIONS.map((cert, i) => {
-              const isRelevant =
-                activeRole === "all" || cert.roles.includes(activeRole);
-
-              return (
-                <motion.article
-                  key={cert.title}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.4 }}
-                  className={`card p-4.5 transition-all ${
-                    isRelevant
-                      ? "border-[rgba(var(--accent-primary),0.4)]"
-                      : "opacity-75"
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-start gap-3">
-                      <div className="rounded-lg bg-[rgba(var(--accent-primary),0.1)] p-2 mt-0.5 shrink-0">
-                        <CheckCircle className="h-4 w-4 text-[rgb(var(--accent-primary))]" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-sm text-[rgb(var(--text-primary))]">
-                          {cert.title}
-                        </h4>
-                        <p className="text-xs text-[rgb(var(--accent-primary))] font-medium mt-0.5">
-                          {cert.issuer}
-                        </p>
-                      </div>
+            {CERTIFICATIONS.map((cert, i) => (
+              <motion.article
+                key={cert.title}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+                className="card p-4.5 hover:-translate-y-0.5 transition-transform"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-start gap-3">
+                    <div className="rounded-lg bg-[rgba(var(--accent-primary),0.1)] p-2 mt-0.5 shrink-0">
+                      <CheckCircle className="h-4 w-4 text-[rgb(var(--accent-primary))]" />
                     </div>
-                    <span className="text-xs px-2 py-0.5 rounded-md bg-[rgba(var(--bg-primary),0.8)] border border-[rgba(var(--border-color),0.5)] text-[rgb(var(--text-secondary))] shrink-0">
-                      {cert.year}
-                    </span>
+                    <div>
+                      <h4 className="font-semibold text-sm text-[rgb(var(--text-primary))]">
+                        {cert.title}
+                      </h4>
+                      <p className="text-xs text-[rgb(var(--accent-primary))] font-medium mt-0.5">
+                        {cert.issuer}
+                      </p>
+                    </div>
                   </div>
-                </motion.article>
-              );
-            })}
+                  <span className="text-xs px-2 py-0.5 rounded-md bg-[rgba(var(--bg-primary),0.8)] border border-[rgba(var(--border-color),0.5)] text-[rgb(var(--text-secondary))] shrink-0 font-medium">
+                    {cert.year}
+                  </span>
+                </div>
+              </motion.article>
+            ))}
           </div>
         </div>
       </div>

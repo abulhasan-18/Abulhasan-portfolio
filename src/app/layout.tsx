@@ -11,9 +11,9 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Mohammed Abulhasan M — Portfolio | BA • Data & BI • Software Engineer",
+  title: "Mohammed Abulhasan M — Software Engineer & Analyst",
   description:
-    "End-to-End Technologist: Mobile & Web App Development (Flutter, Next.js, Spring Boot), SQL Star Schema Data Modeling, Power BI & Tableau Analytics, and Business Strategy (BRD, Process Mapping, UAT).",
+    "Software Engineer & Analyst — Flutter & Web App Development, SQL Star Schema Data Modeling, Power BI Analytics, and Data-Driven Business Decisions.",
 };
 
 export default function RootLayout({

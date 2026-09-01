@@ -16,7 +16,7 @@ const stepIcons = [Smartphone, Database, BarChart3, Lightbulb];
 
 export default function LifecycleWorkflow() {
   return (
-    <section className="py-14 md:py-20">
+    <section id="workflow" className="py-14 md:py-20">
       <div className="text-center max-w-3xl mx-auto mb-12">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold 
                       bg-[rgba(var(--accent-primary),0.1)] text-[rgb(var(--accent-primary))] 
@@ -28,7 +28,7 @@ export default function LifecycleWorkflow() {
           How I Connect App Development, Data Modeling & Business Growth
         </h2>
         <p className="mt-3 text-sm sm:text-base text-[rgb(var(--text-secondary))] leading-relaxed">
-          I don’t just write code or build isolated dashboards. I build the live applications, design the SQL star schemas to capture application telemetry, perform deep data analysis on actual user interactions, and translate findings into high-ROI business decisions.
+          I don’t just write code or build isolated dashboards. I engineer production applications, design the SQL star schemas to capture telemetry, perform deep data analysis on real user behavior, and translate insights into high-ROI business improvements.
         </p>
       </div>
 
