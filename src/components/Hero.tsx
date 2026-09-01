@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Phone, Linkedin, ArrowRight, BadgeCheck, Github, MapPin, Sparkles } from "lucide-react";
+import { Mail, Phone, Linkedin, ArrowRight, BadgeCheck, Github, MapPin } from "lucide-react";
 import Balancer from "react-wrap-balancer";
 import { motion } from "framer-motion";
 import { PERSONAL_INFO } from "@/data/portfolioData";
@@ -22,14 +22,6 @@ export default function Hero() {
         transition={{ duration: 0.5 }}
         className="card mx-auto max-w-4xl p-6 sm:p-10 md:p-12 text-center relative overflow-hidden"
       >
-        {/* Status Chip */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold 
-                      bg-[rgba(var(--accent-primary),0.1)] text-[rgb(var(--accent-primary))] 
-                      border border-[rgba(var(--accent-primary),0.25)] mb-4 shadow-sm">
-          <Sparkles className="h-3.5 w-3.5" />
-          <span>Full-Lifecycle Technologist</span>
-        </div>
-
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-[rgb(var(--text-primary))] tracking-tight">
           <Balancer>{PERSONAL_INFO.name}</Balancer>
         </h1>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const nav = [
@@ -38,7 +38,7 @@ export default function Header() {
         <motion.div
           initial={{ y: -6, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="flex items-center gap-2 sm:gap-3"
+          className="flex items-center"
         >
           <Link
             href="/"
@@ -50,11 +50,6 @@ export default function Header() {
           >
             Mohammed Abulhasan M
           </Link>
-
-          <span className="hidden sm:inline-flex items-center gap-1 text-xs px-2.5 py-0.5 rounded-full bg-[rgba(var(--accent-primary),0.08)] border border-[rgba(var(--accent-primary),0.2)] text-[rgb(var(--text-secondary))] font-medium">
-            <Sparkles className="h-3 w-3 text-[rgb(var(--accent-primary))]" />
-            Software Engineer &amp; Analyst
-          </span>
         </motion.div>
 
         {/* Desktop Nav */}
