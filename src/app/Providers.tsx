@@ -3,6 +3,7 @@
 import { ThemeProvider } from "next-themes";
 import { ReactNode, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { RoleProvider } from "@/context/RoleContext";
 
 function ThemeHandler() {
   const { theme } = useTheme();
@@ -28,7 +29,7 @@ export function Providers({ children }: { children: ReactNode }) {
       enableSystem={false}
     >
       <ThemeHandler />
-      {children}
+      <RoleProvider>{children}</RoleProvider>
     </ThemeProvider>
   );
 }

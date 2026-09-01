@@ -1,159 +1,139 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Server, GitBranch, Radio, Layers3, Database } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Calendar,
+  CheckCircle2,
+  FolderGit2,
+  Tag,
+} from "lucide-react";
 import * as React from "react";
-
-type Project = {
-  title: string;
-  org: string;
-  start: string; // ISO like "2025-03-01"
-  end?: string | null; // null/undefined => Present
-  points: string[];
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-};
-
-const projects: Project[] = [
-  // Newest first will be handled by sorter below
-  {
-    title: "Flutter Based Quiz App",
-    org: "CloudPixels Pvt Ltd",
-    start: "2025-03-01",
-    end: null,
-    points: [
-      "Shipped a cross-platform Flutter app (Android/iOS) tailored for competitive exams with adaptive, responsive UI.",
-      "Delivered real-time quiz content via REST with session analytics and performance tracking.",
-      "Implemented Supabase Auth with RLS; designed schemas for quizzes, attempts, and results at scale.",
-    ],
-    Icon: GitBranch,
-  },
-  {
-    title: "Online Compiler Platform",
-    org: "CloudPixels Pvt Ltd",
-    start: "2024-08-01",
-    end: null,
-    points: [
-      "Built Spring Boot backend with STOMP WebSockets for real-time interactive + non-interactive code execution.",
-      "Integrated Next.js frontend for streamed output, prompt handling, and back-pressure safe updates.",
-      "Containerized with Docker; CI/CD ready; added pluggable SDK runners to support multiple languages.",
-    ],
-    Icon: Server,
-  },
-  {
-    title: "Data Platform Modernization",
-    org: "CloudPixels Pvt Ltd",
-    start: "2024-06-01",
-    end: null,
-    points: [
-      "Orchestrated ADF pipelines moving Postgres → ADLS with parameterized, reusable, and cost-aware designs.",
-      "Migrated HDFS → Amazon S3 using Step Functions, Lambda, and Glue with schema evolution + checkpointing.",
-      "Moved 2,000+ objects via manual runs and EventBridge-driven automations with monitoring and retries.",
-      "Leveling up in dbt: modular models, tests, docs—accelerating engineering enablement.",
-    ],
-    Icon: Database,
-  },
-  {
-    title: "Madha FM — Flutter Community App",
-    org: "CloudPixels Pvt Ltd",
-    start: "2024-05-01",
-    end: "2025-06-30",
-    points: [
-      "Delivered seamless audio streaming in Flutter using a low-cost pipeline backed by Google Drive.",
-      "Integrated Supabase for OAuth auth and content management; built an admin mobile portal for uploads.",
-      "Optimized for long-term sustainability: caching, prefetching, and battery/data-friendly playback.",
-    ],
-    Icon: Radio,
-  },
-  {
-    title: "Website Build & TNPSC Prime",
-    org: "CloudPixels Pvt Ltd",
-    start: "2023-06-01",
-    end: "2024-03-31",
-    points: [
-      "Built portals with HTML/CSS/JS and a Spring Boot + Supabase backend for dynamic content via REST.",
-      "Defined clean API boundaries and in-site feedback loops that improved UX and content iteration speed.",
-      "Cut hosting costs by offloading downloadable PDFs to OneDrive without affecting DX/UX.",
-    ],
-    Icon: Layers3,
-  },
-];
-
-// --- Helpers ---
-function formatMonthYear(d: Date) {
-  return d.toLocaleString("en-US", { month: "short", year: "numeric" });
-}
-
-function formatPeriod(p: Project) {
-  const start = new Date(p.start);
-  const startStr = formatMonthYear(start);
-  if (!p.end) return `${startStr} – Present`;
-  const end = new Date(p.end);
-  return `${startStr} – ${formatMonthYear(end)}`;
-}
-
-function compareByRecency(a: Project, b: Project) {
-  const aOngoing = !a.end;
-  const bOngoing = !b.end;
-  if (aOngoing && !bOngoing) return -1; // ongoing first
-  if (!aOngoing && bOngoing) return 1;
-
-  // both ongoing → newer start first
-  if (aOngoing && bOngoing) {
-    return new Date(b.start).getTime() - new Date(a.start).getTime();
-  }
-
-  // both ended → newer end first; tie-break by newer start
-  const aEnd = new Date(a.end!).getTime();
-  const bEnd = new Date(b.end!).getTime();
-  if (bEnd !== aEnd) return bEnd - aEnd;
-  return new Date(b.start).getTime() - new Date(a.start).getTime();
-}
+import { useRole } from "@/context/RoleContext";
+import { PROJECTS, ROLES } from "@/data/portfolioData";
 
 export default function Projects() {
-  const ordered = React.useMemo(() => [...projects].sort(compareByRecency), []);
+  const { activeRole } = useRole();
 
   return (
     <section id="projects" className="py-14 md:py-20">
-      <h2 className="text-center text-2xl md:text-3xl font-bold">
-        Projects & Experience
-      </h2>
+      <div className="text-center max-w-2xl mx-auto mb-10">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold 
+                      bg-[rgba(var(--accent-primary),0.1)] text-[rgb(var(--accent-primary))] 
+                      border border-[rgba(var(--accent-primary),0.2)] mb-3">
+          <FolderGit2 className="h-3.5 w-3.5" />
+          <span>Featured Work</span>
+        </div>
+        <h2 className="text-2xl md:text-3xl font-bold text-[rgb(var(--text-primary))]">
+          Production Projects & Impact
+        </h2>
+        <p className="mt-2 text-sm text-[rgb(var(--text-secondary))]">
+          Viewing project deliverables and achievements tailored for{" "}
+          <span className="font-semibold text-[rgb(var(--accent-primary))]">
+            {ROLES[activeRole].shortLabel}
+          </span>
+        </p>
+      </div>
 
-      <div className="mt-10 space-y-6">
-        {ordered.map((p, i) => (
-          <motion.article
-            key={p.title}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-            className="card p-6"
-          >
-            <div className="flex items-start gap-4">
-              <div className="rounded-xl bg-[rgba(var(--accent-primary),0.09)] p-3">
-                <p.Icon className="h-5 w-5 text-[rgb(var(--accent-primary))]" />
-              </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeRole}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className="space-y-8 max-w-4xl mx-auto"
+        >
+          {PROJECTS.map((project, i) => {
+            const summary =
+              project.summaryByRole[activeRole] || project.summaryByRole.all;
+            const bullets =
+              project.bulletsByRole[activeRole] || project.bulletsByRole.all;
+            const tags =
+              project.tagsByRole[activeRole] || project.tagsByRole.all;
 
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-semibold text-[rgb(var(--text-primary))]">{p.title}</h3>
-                  <span className="text-xs rounded-full bg-[rgba(var(--accent-primary),0.08)] px-2 py-0.5 text-[rgb(var(--text-secondary))]">
-                    {p.org}
-                  </span>
-                  <span className="text-xs text-[rgb(var(--text-secondary))] opacity-70">
-                    {formatPeriod(p)}
-                  </span>
+            return (
+              <motion.article
+                key={project.id}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.45 }}
+                className="card p-6 md:p-8 hover:-translate-y-0.5 transition-all"
+              >
+                {/* Header info */}
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 border-b border-[rgba(var(--border-color),0.4)] pb-4">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[rgba(var(--accent-primary),0.1)] text-[rgb(var(--accent-primary))]">
+                        {project.category}
+                      </span>
+                      {project.featured && (
+                        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                          Featured
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-[rgb(var(--text-primary))]">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[rgb(var(--text-secondary))] mt-0.5">
+                      {project.org}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-xs text-[rgb(var(--text-secondary))] shrink-0">
+                    <Calendar className="h-3.5 w-3.5 text-[rgb(var(--accent-primary))]" />
+                    <span className="font-medium">{project.period}</span>
+                    <span className="opacity-60">({project.duration})</span>
+                  </div>
                 </div>
 
-                <ul className="mt-2 list-disc pl-5 text-sm text-[rgb(var(--text-secondary))] space-y-1">
-                  {p.points.map((pt) => (
-                    <li key={pt}>{pt}</li>
+                {/* Summary Context */}
+                <div className="mt-4 bg-[rgba(var(--bg-primary),0.6)] p-3.5 rounded-xl border border-[rgba(var(--border-color),0.5)]">
+                  <p className="text-xs sm:text-sm text-[rgb(var(--text-primary))] font-medium leading-relaxed">
+                    <span className="font-semibold text-[rgb(var(--accent-primary))] mr-1.5">
+                      Overview:
+                    </span>
+                    {summary}
+                  </p>
+                </div>
+
+                {/* Key Deliverables / Bullets */}
+                <div className="mt-5">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-3">
+                    Key Contributions & Deliverables:
+                  </h4>
+                  <ul className="space-y-2.5">
+                    {bullets.map((bullet, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2.5 text-sm text-[rgb(var(--text-secondary))]"
+                      >
+                        <CheckCircle2 className="h-4 w-4 text-[rgb(var(--accent-primary))] shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Skill & Technology Tags */}
+                <div className="mt-6 pt-4 border-t border-[rgba(var(--border-color),0.3)] flex flex-wrap items-center gap-2">
+                  <Tag className="h-3.5 w-3.5 text-[rgb(var(--text-secondary))] mr-1" />
+                  {tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2.5 py-1 rounded-md bg-[rgba(var(--bg-primary),0.9)] 
+                               border border-[rgba(var(--border-color),0.8)] text-[rgb(var(--text-primary))] font-medium"
+                    >
+                      {tag}
+                    </span>
                   ))}
-                </ul>
-              </div>
-            </div>
-          </motion.article>
-        ))}
-      </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }

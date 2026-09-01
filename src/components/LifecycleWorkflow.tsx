@@ -1,0 +1,97 @@
+"use client";
+
+import { motion } from "framer-motion";
+import {
+  Smartphone,
+  Database,
+  BarChart3,
+  Lightbulb,
+  ArrowRight,
+  CheckCircle2,
+  GitMerge,
+} from "lucide-react";
+import { LIFECYCLE_STEPS } from "@/data/portfolioData";
+
+const stepIcons = [Smartphone, Database, BarChart3, Lightbulb];
+
+export default function LifecycleWorkflow() {
+  return (
+    <section className="py-14 md:py-20">
+      <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold 
+                      bg-[rgba(var(--accent-primary),0.1)] text-[rgb(var(--accent-primary))] 
+                      border border-[rgba(var(--accent-primary),0.2)] mb-3">
+          <GitMerge className="h-3.5 w-3.5" />
+          <span>The End-to-End Synergy</span>
+        </div>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[rgb(var(--text-primary))] tracking-tight">
+          How I Connect App Development, Data Modeling & Business Growth
+        </h2>
+        <p className="mt-3 text-sm sm:text-base text-[rgb(var(--text-secondary))] leading-relaxed">
+          I don’t just write code or build isolated dashboards. I build the live applications, design the SQL star schemas to capture application telemetry, perform deep data analysis on actual user interactions, and translate findings into high-ROI business decisions.
+        </p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+        {LIFECYCLE_STEPS.map((item, idx) => {
+          const Icon = stepIcons[idx];
+          return (
+            <motion.div
+              key={item.step}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.45 }}
+              className="card p-6 flex flex-col justify-between hover:-translate-y-1 transition-all relative overflow-hidden group"
+            >
+              {/* Step indicator badge */}
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <div className="inline-flex rounded-xl bg-[rgba(var(--accent-primary),0.1)] p-2.5">
+                    <Icon className="h-5 w-5 text-[rgb(var(--accent-primary))]" />
+                  </div>
+                  <span className="text-2xl font-black text-[rgb(var(--accent-primary))] opacity-25 font-mono">
+                    {item.step}
+                  </span>
+                </div>
+
+                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[rgba(var(--accent-primary),0.08)] text-[rgb(var(--accent-primary))] border border-[rgba(var(--accent-primary),0.2)]">
+                  {item.badge}
+                </span>
+
+                <h3 className="font-bold text-base md:text-lg text-[rgb(var(--text-primary))] mt-3 leading-snug">
+                  {item.title}
+                </h3>
+
+                <p className="mt-2.5 text-xs text-[rgb(var(--text-secondary))] leading-relaxed">
+                  {item.description}
+                </p>
+
+                <ul className="mt-4 space-y-2 border-t border-[rgba(var(--border-color),0.3)] pt-3">
+                  {item.details.map((detail, dIdx) => (
+                    <li
+                      key={dIdx}
+                      className="flex items-start gap-2 text-xs text-[rgb(var(--text-secondary))]"
+                    >
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[rgb(var(--accent-primary))] shrink-0 mt-0.5" />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Step connector arrow on desktop */}
+              {idx < LIFECYCLE_STEPS.length - 1 && (
+                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
+                  <div className="h-6 w-6 rounded-full bg-[rgba(var(--bg-secondary),0.95)] border border-[rgba(var(--border-color),0.8)] shadow-sm flex items-center justify-center">
+                    <ArrowRight className="h-3 w-3 text-[rgb(var(--accent-primary))]" />
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
