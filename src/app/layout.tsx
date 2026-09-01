@@ -16,22 +16,6 @@ export const metadata: Metadata = {
     "Software Engineer & Analyst — Flutter & Web App Development, SQL Star Schema Data Modeling, Power BI Analytics, and Data-Driven Business Decisions.",
 };
 
-const themeScript = `
-(function() {
-  try {
-    var stored = localStorage.getItem('theme');
-    var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  } catch (e) {}
-})();
-`;
-
 export default function RootLayout({
   children,
 }: {
@@ -39,9 +23,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body
         className={`${ibmPlexSans.variable} font-sans antialiased bg-slate-50 text-slate-900 dark:bg-[#0a0c10] dark:text-slate-100 min-h-screen transition-colors duration-200`}
       >
