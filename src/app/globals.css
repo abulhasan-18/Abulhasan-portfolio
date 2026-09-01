@@ -10,7 +10,7 @@
 
   body {
     min-height: 100vh;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   ::selection {
@@ -24,6 +24,44 @@
   color: #f8fafc !important;
 }
 
+/* Custom Keyframe Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
 /* Ambient glow effect */
 body::before {
   content: '';
@@ -33,38 +71,42 @@ body::before {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 85% 65%, rgba(99, 102, 241, 0.03) 0%, transparent 45%),
+    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 65%, rgba(99, 102, 241, 0.04) 0%, transparent 45%),
     radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 28px 28px;
   pointer-events: none;
   z-index: -1;
+  transition: opacity 0.4s ease;
 }
 
 .dark body::before,
 [data-theme="dark"] body::before {
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.07) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
     radial-gradient(rgba(71, 85, 105, 0.25) 1px, transparent 1px);
 }
 
-/* Universal card styles with dark and light variants */
+/* Universal card styles with dark and light variants and smooth cubic-bezier physics */
 .card {
   border-radius: 1rem;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              border-color 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   background-color: #ffffff;
   color: #0f172a;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
 }
 
 .card:hover {
   border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.08), 0 0 16px -2px rgba(37, 99, 235, 0.1);
+  transform: translateY(-3px);
 }
 
 .dark .card,
@@ -77,8 +119,8 @@ body::before {
 
 .dark .card:hover,
 [data-theme="dark"] .card:hover {
-  border-color: rgba(56, 189, 248, 0.5);
-  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 14px 32px -4px rgba(0, 0, 0, 0.6), 0 0 24px -2px rgba(56, 189, 248, 0.15);
 }
 
 .card::before {
@@ -87,10 +129,10 @@ body::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.6), transparent);
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.3s ease;
 }
 
 .card:hover::before {
@@ -99,29 +141,52 @@ body::before {
 
 .dark .card::before,
 [data-theme="dark"] .card::before {
-  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.7), transparent);
 }
 
 /* Primary accent button */
 .btn-accent {
   background: linear-gradient(135deg, #2563eb, #4f46e5);
   color: #ffffff !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.25);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-accent::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-accent:hover::after {
+  transform: translateX(100%);
 }
 
 .btn-accent:hover {
-  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(37, 99, 235, 0.45);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .dark .btn-accent,
 [data-theme="dark"] .btn-accent {
   background: linear-gradient(135deg, #0284c7, #4f46e5);
-  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.3);
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35);
 }
 
 .dark .btn-accent:hover,
 [data-theme="dark"] .btn-accent:hover {
-  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.35);
+  box-shadow: 0 6px 24px rgba(56, 189, 248, 0.4);
 }

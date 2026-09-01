@@ -7,13 +7,13 @@ import { PERSONAL_INFO } from "@/data/portfolioData";
 export default function Footer() {
   return (
     <footer className="mt-12 sm:mt-16">
-      {/* subtle divider */}
+      {/* Subtle glowing divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-800 to-transparent" />
       <motion.div
-        initial={{ opacity: 0, y: 6 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.35 }}
+        transition={{ duration: 0.4 }}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 text-xs sm:text-sm text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left"
       >
         <p>
@@ -21,41 +21,49 @@ export default function Footer() {
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05, y: -1 }}
+            whileTap={{ scale: 0.98 }}
             href={`mailto:${PERSONAL_INFO.email}`}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors shadow-2xs"
           >
             <Mail className="h-3.5 w-3.5 text-blue-600 dark:text-sky-400" />
             <span>Email</span>
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05, y: -1 }}
+            whileTap={{ scale: 0.98 }}
             href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, "")}`}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors shadow-2xs"
           >
             <Phone className="h-3.5 w-3.5 text-blue-600 dark:text-sky-400" />
             <span>Call</span>
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05, y: -1 }}
+            whileTap={{ scale: 0.98 }}
             href={PERSONAL_INFO.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="btn-accent inline-flex items-center gap-1.5 rounded-lg px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white hover:scale-105 transition-transform duration-200"
+            className="btn-accent inline-flex items-center gap-1.5 rounded-lg px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white shadow-2xs"
           >
             <Linkedin className="h-3.5 w-3.5" />
             <span>LinkedIn</span>
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05, y: -1 }}
+            whileTap={{ scale: 0.98 }}
             href={PERSONAL_INFO.github}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors shadow-2xs"
           >
             <Github className="h-3.5 w-3.5" />
             <span>GitHub</span>
-          </a>
+          </motion.a>
         </div>
       </motion.div>
     </footer>

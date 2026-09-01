@@ -16,7 +16,13 @@ const stepIcons = [Smartphone, Database, BarChart3, Lightbulb];
 export default function LifecycleWorkflow() {
   return (
     <section id="workflow" className="py-10 sm:py-16 md:py-20">
-      <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.5 }}
+        className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2"
+      >
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-sky-950/60 dark:text-sky-300 border border-blue-200 dark:border-sky-800/60 mb-3 shadow-xs">
           <GitMerge className="h-3.5 w-3.5" />
           <span>The End-to-End Synergy</span>
@@ -27,7 +33,7 @@ export default function LifecycleWorkflow() {
         <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed px-1">
           I don’t just write code or build isolated dashboards. I engineer production applications, design the SQL star schemas to capture telemetry, perform deep data analysis on real user behavior, and translate insights into high-ROI business improvements.
         </p>
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
         {LIFECYCLE_STEPS.map((item, idx) => {
@@ -35,15 +41,16 @@ export default function LifecycleWorkflow() {
           return (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08, duration: 0.4 }}
-              className="card p-4 sm:p-5 md:p-6 flex flex-col justify-between"
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ delay: idx * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -6, scale: 1.015 }}
+              className="card p-4 sm:p-5 md:p-6 flex flex-col justify-between group cursor-default"
             >
               <div>
                 <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                  <div className="inline-flex rounded-xl bg-blue-50 dark:bg-sky-950/80 p-2 sm:p-2.5 text-blue-600 dark:text-sky-400 shrink-0">
+                  <div className="inline-flex rounded-xl bg-blue-50 dark:bg-sky-950/80 p-2.5 sm:p-3 text-blue-600 dark:text-sky-400 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white dark:group-hover:bg-sky-500 dark:group-hover:text-slate-950 transition-all duration-300 shadow-2xs shrink-0">
                     <Icon className="h-5 w-5" />
                   </div>
                   <span className="text-[11px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 dark:bg-sky-950/60 dark:text-sky-300 border border-blue-200/80 dark:border-sky-800/60">
@@ -51,7 +58,7 @@ export default function LifecycleWorkflow() {
                   </span>
                 </div>
 
-                <h3 className="font-bold text-sm sm:text-base md:text-lg text-slate-900 dark:text-slate-100 leading-snug">
+                <h3 className="font-bold text-sm sm:text-base md:text-lg text-slate-900 dark:text-slate-100 leading-snug group-hover:text-blue-600 dark:group-hover:text-sky-400 transition-colors">
                   {item.title}
                 </h3>
 
@@ -65,7 +72,7 @@ export default function LifecycleWorkflow() {
                       key={dIdx}
                       className="flex items-start gap-2 text-[11px] sm:text-xs text-slate-600 dark:text-slate-400"
                     >
-                      <CheckCircle2 className="h-3.5 w-3.5 text-blue-600 dark:text-sky-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-3.5 w-3.5 text-blue-600 dark:text-sky-400 shrink-0 mt-0.5 group-hover:translate-x-0.5 transition-transform" />
                       <span className="leading-snug">{detail}</span>
                     </li>
                   ))}
